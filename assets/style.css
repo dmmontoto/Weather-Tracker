@@ -42,7 +42,7 @@
     margin: 1.5%;
   }
   
-   .btn {
+   .searchBtn {
     font-size: 1.3rem;
     text-decoration:none;
     padding: 6px 5px;
@@ -58,18 +58,18 @@
     transform: translate(-1px, -1px);
   }
   
-   .btn:hover {
+   .searchBtn:hover {
     color: var(--primary);
     background-color: var(--tertiary);
     transform: translate(0, 0);
     box-shadow: 2px 2px var(--black);
   }
   
-  .btn-inline {
+  .searchBtn-inline {
     display: inline;
   }
   
-  .btn-back {
+  .searchBtn-back {
     border-radius: var(--border-radius);
     color: var(--primary);
     border: none;
@@ -85,7 +85,7 @@
     font-size: 1.2rem;
   }
   
-   .btn-back:hover {
+   .searchBtn-back:hover {
     color: var(--primary);
     background-color: var(--tertiary);
     transform: translate(0, 0);
