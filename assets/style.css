@@ -24,7 +24,6 @@
   h1,
   h2,
   h3,
-  h4,
   h5,
   h6 {
     font-weight: 700;
@@ -156,6 +155,21 @@
   
   .card-body {
     padding: 2.5%;
+  }
+
+  .forecast {
+    display: flex;
+  }
+
+  .forecast-cards {
+    margin: 0px 20px 20px 0px;
+    border-radius: var(--border-radius);
+    padding-right: 2.5%;
+    padding-bottom: 1.5%;
+    padding-left: .5%;
+    padding-top: .5%;
+    background-color: var(--tertiary);
+    color: var(--primary);
   }
   
   /* FORM */
