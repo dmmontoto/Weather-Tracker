@@ -162,12 +162,12 @@
   }
 
   .forecast-cards {
-    margin: 0px 20px 20px 0px;
+    margin: 10px 25px 20px 0px;
     border-radius: var(--border-radius);
-    padding-right: 2.5%;
+    padding-right: 2%;
     padding-bottom: 1.5%;
-    padding-left: .5%;
-    padding-top: .5%;
+    padding-left: 1%;
+    padding-top: 1.5%;
     background-color: var(--tertiary);
     color: var(--primary);
   }

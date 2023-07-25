@@ -49,7 +49,7 @@ $(function () {
         
         $('#Temp1').text('Temp: ' + temp1.toFixed(2) + ' °F');
         $('#Date1').text(date1);
-        $('#Wind1').text('Wind: ' + wind1.toFixed(2) + ' mph');
+        $('#Wind1').text('Wind: ' + wind1.toFixed(1) + ' mph');
         $('#Humidity1').text('Humidity: ' + humidity1 + ' %');
 
         // DAY 2
@@ -63,7 +63,7 @@ $(function () {
         
         $('#Temp2').text('Temp: ' + temp2.toFixed(2) + ' °F');
         $('#Date2').text(date2);
-        $('#Wind2').text('Wind: ' + wind2.toFixed(2) + ' mph');
+        $('#Wind2').text('Wind: ' + wind2.toFixed(1) + ' mph');
         $('#Humidity2').text('Humidity: ' + humidity2 + ' %');
 
         // DAY 3
@@ -77,7 +77,7 @@ $(function () {
         
         $('#Temp3').text('Temp: ' + temp3.toFixed(2) + ' °F');
         $('#Date3').text(date3);
-        $('#Wind3').text('Wind: ' + wind3.toFixed(2) + ' mph');
+        $('#Wind3').text('Wind: ' + wind3.toFixed(1) + ' mph');
         $('#Humidity3').text('Humidity: ' + humidity3 + ' %');
 
         // DAY 4
@@ -91,7 +91,7 @@ $(function () {
         
         $('#Temp4').text('Temp: ' + temp4.toFixed(2) + ' °F');
         $('#Date4').text(date4);
-        $('#Wind4').text('Wind: ' + wind4.toFixed(2) + ' mph');
+        $('#Wind4').text('Wind: ' + wind4.toFixed(1) + ' mph');
         $('#Humidity4').text('Humidity: ' + humidity4 + ' %');
 
         // DAY 5
@@ -105,7 +105,7 @@ $(function () {
         
         $('#Temp5').text('Temp: ' + temp5.toFixed(2) + ' °F');
         $('#Date5').text(date5);
-        $('#Wind5').text('Wind: ' + wind5.toFixed(2) + ' mph');
+        $('#Wind5').text('Wind: ' + wind5.toFixed(1) + ' mph');
         $('#Humidity5').text('Humidity: ' + humidity5 + ' %');
 
       } catch (error) {
