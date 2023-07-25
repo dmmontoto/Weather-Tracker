@@ -1,0 +1,1 @@
+api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=4fdee25732925481fc0c3a270c0509a3
