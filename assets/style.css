@@ -4,6 +4,7 @@
     --tertiary: #1f314b;
     --light-blue: #0d5bda;
     --black: #000000;
+    --grey: #6d6d6e;
     --border-radius: .3rem;
   }
   
@@ -189,7 +190,7 @@
     color: var(--primary);
     border: none;
     outline: none;
-    background-color: var(--light-blue);
+    background-color: var(--grey);
     box-shadow: 3px 3px var(--black);
     transform: translate(-1px, -1px);
   }
@@ -210,7 +211,7 @@
     color: var(--primary);
     border: none;
     outline: none;
-    background-color: var(--light-blue);
+    background-color: var(--grey);
     box-shadow: 3px 3px var(--secondary);
     transform: translate(-1px, -1px);
     display: inline-block;
