@@ -1,42 +1,17 @@
 var cityEl = document.querySelector('#city');
 var cityContainerEl = document.querySelector('#city-container');
-// var tally = 0;
-// localStorage.setItem('tally', tally);
-
-var cities = [];
-// var citiesString = JSON.stringify(cities);
-// localStorage.setItem('cities', citiesString);
-const storedIds = localStorage.getItem('cities');
-const parsedData = JSON.parse(storedIds);
-cities = parsedData;
-
-// var formSubmitHandler = function (event) {
-//     event.preventDefault();
-
-//     var city = cityEl.value.trim();
-
-//     if (city) {
-//         getWeatherData(city);
-
-//         cityEl.value = '';
-//     } else {
-//         alert('Please enter a city');
-//     }
-// };
-
 
 function getWeatherData(cityName) {
     // for storing ids in local storage
     var tally = 0; 
     var cities = [];
+    // if tally does not exist yet, then just use prior set 0
     if (localStorage.getItem('tally') !== null) {
         var intValue = localStorage.getItem('tally');
-        console.log(intValue);
         tally = parseInt(intValue);
     }
-    console.log(tally);
+    // if tally still 0 then no need to get emtpy cities array, just use empty array above
     if (tally !== 0) {
-        console.log('not new array');
         const storedIds = localStorage.getItem('cities');
         const parsedData = JSON.parse(storedIds);
         cities = parsedData;
@@ -44,12 +19,10 @@ function getWeatherData(cityName) {
 
     const geocodingApiKey = '4fdee25732925481fc0c3a270c0509a3';
     const geocodingApiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${geocodingApiKey}`;
-    console.log(geocodingApiUrl);
     // Make the geocoding API request using fetch
     fetch(geocodingApiUrl)
         .then(response => response.json())
         .then(geoData => {
-            console.log(geoData);
             // Check if geocoding was successful and got valid data
             if (geoData.length === 0) {
                 alert('City not found');
@@ -170,10 +143,11 @@ function getWeatherData(cityName) {
                     if (elementWithId) {
                         console.log('Element with ID exists!');
                     } else {
-                        if (tally === 25) {
+                        // if this is the 21st city, clear city container first
+                        if (tally === 20) {
                             clearAll(cityContainerEl);
                         }
-
+                        // if the current city's id is new, add to cities array and store in local storage
                         if (!cities.includes(cityId)) {
                             console.log(cities);
 
@@ -186,8 +160,6 @@ function getWeatherData(cityName) {
                             localStorage.setItem('cities', citiesString);
                         }
 
-                        // Add city id to the array of ids
-
                         // Create saved box on side with id and name
                         var savedEl = document.createElement('button');
                         savedEl.setAttribute('id', cityId);
@@ -195,18 +167,15 @@ function getWeatherData(cityName) {
                         savedEl.setAttribute("class", "savedBtn");
                         savedEl.textContent = cityName;
                         cityContainerEl.appendChild(savedEl);
-
+                        // Add event listener for when saved city is clicked
                         savedEl.addEventListener('click', function (event) {
                             event.preventDefault();
-                            console.log('switch');
                             const cityId = $(this).attr('id');
-                            console.log(cityId);
                             switchData(cityId);
                         })
-
+                        // keep the tally score
                         tally = tally + 1;
                         localStorage.setItem('tally', tally);
-                        console.log(tally);
                     }
                     // Check if city is already saved in local storage
                     const cityExists = checkIfCityExists(cityId);
@@ -222,10 +191,8 @@ function getWeatherData(cityName) {
                         };
                         // Convert the object to a JSON string
                         const cityWeatherDataJSON = JSON.stringify(cityWeatherData);
-                        console.log(cityId.toString());
                         localStorage.setItem(cityId.toString(), cityWeatherDataJSON);
                         console.log(`City with ID ${cityId} does not exist in localStorage.`);
-                        // keep tally
                     }
                 })
                 .catch(error => {
@@ -240,13 +207,14 @@ function getWeatherData(cityName) {
 
 
 function checkIfCityExists(cityId) {
+    // Function to check if the current city object exists in local storage yet
     const cityWeatherDataJSON = localStorage.getItem(cityId.toString());
     return cityWeatherDataJSON !== null;
 }
 
 
 function switchData(cityId) {
-    console.log('switching');
+    // Gets id and info of new city to be displayed in main section
     const newWeatherDataJSON = localStorage.getItem(cityId.toString());
     const cityWeatherData = JSON.parse(newWeatherDataJSON);
     const cityName = cityWeatherData.cityName;
@@ -348,44 +316,45 @@ function switchData(cityId) {
 
 
 function clearAll(parentEl) {
+    // Clears all saved city buttons un the city container element
     while (parentEl.firstChild) {
         parentEl.removeChild(parentEl.firstChild);
     }
-
+    // Clear everything in local storage
     localStorage.clear();
+    // Alert user of what happened from function call
+    alert('Reached Max cities saved. Saved bar was cleared.');
 }
 
 
 $('.searchBtn').on('click', function (event) {
     event.preventDefault();
     var city = cityEl.value.trim();
-
+    // Checks if anything was actually inputted into the form before calling function
     if (city) {
         getWeatherData(city);
 
         cityEl.value = '';
     } else {
+        // Let user know no city was inputted 
         alert('Please enter a city');
     }
 })
 
 
 function reload() {
+    // This function resets all saved cities in the city sidebar after every refresh
     var cities = [];
     const storedIds = localStorage.getItem('cities');
     const parsedData = JSON.parse(storedIds);
     cities = parsedData;
-    console.log(parsedData);
-    console.log(cities);
-
+    // Checks if there actually are saved cities in local storage
     if (parsedData) {
-        console.log('progress');
         for (var i = 0; i < cities.length; i++) {
             var id = cities[i];
             const newWeatherDataJSON = localStorage.getItem(id.toString());
             const cityWeatherData = JSON.parse(newWeatherDataJSON);
             const cityName = cityWeatherData.cityName;
-            console.log(id);
             // Create saved box on side with id and name
             var savedEl = document.createElement('button');
             savedEl.setAttribute('id', id);
@@ -393,18 +362,15 @@ function reload() {
             savedEl.setAttribute("class", "savedBtn");
             savedEl.textContent = cityName;
             cityContainerEl.appendChild(savedEl);
-
+            // Add event listener
             savedEl.addEventListener('click', function (event) {
                 event.preventDefault();
-                console.log('switch');
                 const cityId = $(this).attr('id');
-                console.log(cityId);
                 switchData(cityId);
             })
         }
     }
 }
 
-// clearAll(cityContainerEl);
 
 reload();
