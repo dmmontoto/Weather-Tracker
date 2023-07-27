@@ -145,6 +145,9 @@ function getWeatherData(cityName) {
             if (elementWithId) {
                 console.log('Element with ID exists!');
             } else {
+                if (tally === 25) {
+                    clearAll(cityContainerEl);
+                }
                 // Create saved box on side with id and name
                 var savedEl = document.createElement('button');
                 savedEl.setAttribute('id', cityId);
@@ -152,6 +155,7 @@ function getWeatherData(cityName) {
                 savedEl.classList.add('savedBtn');
                 savedEl.textContent = cityName;
                 cityContainerEl.appendChild(savedEl);
+                tally = tally + 1;
             }
             // Check if city is already saved in local storage
             const cityExists = checkIfCityExists(cityId);
@@ -171,7 +175,6 @@ function getWeatherData(cityName) {
                 localStorage.setItem(cityId.toString(), cityWeatherDataJSON);
                 console.log(`City with ID ${cityId} does not exist in localStorage.`);
                 // keep tally
-                tally = tally + 1;
             }
           })
           .catch(error => {
@@ -292,15 +295,20 @@ function switchData(cityId) {
 }
 
 
+function clearAll(parentEl) {
+    while (parentEl.firstChild) {
+        parentEl.removeChild(parentEl.firstChild);
+    }
+
+    localStorage.clear();
+}
+
+
 var miami = 'Miami';
 getWeatherData(miami);
 var sacramento = 'Sacramento';
 getWeatherData(sacramento);
 
-// function clear() {
-//     localStorage.clear();
-// }
-// clear();
 
 $('.searchBtn').on('click', function () {
     var london = 'London';
