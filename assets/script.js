@@ -371,6 +371,6 @@ function reload() {
         }
     }
 }
-clearAll(cityContainerEl);
+
 
 reload();
