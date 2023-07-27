@@ -374,4 +374,3 @@ function reload() {
 
 
 reload();
-console.log('hello');
