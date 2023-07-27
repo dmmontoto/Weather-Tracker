@@ -20,11 +20,12 @@ var formSubmitHandler = function (event) {
 function getWeatherData(cityName) {
     const geocodingApiKey = '4fdee25732925481fc0c3a270c0509a3'; 
     const geocodingApiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${geocodingApiKey}`;
-  
+    console.log(geocodingApiUrl);
     // Make the geocoding API request using fetch
     fetch(geocodingApiUrl)
       .then(response => response.json())
       .then(geoData => {
+        console.log(geoData);
         // Check if geocoding was successful and got valid data
         if (geoData.length === 0) {
           alert('City not found');
@@ -152,10 +153,11 @@ function getWeatherData(cityName) {
                 var savedEl = document.createElement('button');
                 savedEl.setAttribute('id', cityId);
                 savedEl.setAttribute("type", "submit");
-                savedEl.classList.add('savedBtn');
+                savedEl.setAttribute("class", "savedBtn");
                 savedEl.textContent = cityName;
                 cityContainerEl.appendChild(savedEl);
                 tally = tally + 1;
+                console.log(tally);
             }
             // Check if city is already saved in local storage
             const cityExists = checkIfCityExists(cityId);
@@ -195,6 +197,7 @@ function checkIfCityExists(cityId) {
 
 
 function switchData(cityId) {
+    console.log('switching');
     const newWeatherDataJSON = localStorage.getItem(cityId.toString());
     const cityWeatherData = JSON.parse(newWeatherDataJSON);
     const cityName = cityWeatherData.cityName;
@@ -304,22 +307,9 @@ function clearAll(parentEl) {
 }
 
 
-var miami = 'Miami';
-getWeatherData(miami);
-var sacramento = 'Sacramento';
-getWeatherData(sacramento);
-
-
-$('.searchBtn').on('click', function () {
-    var london = 'London';
-    getWeatherData(london);
-    console.log(london);
-    
-    console.log('hello');
+$('.searchBtn').on('click', function (event) {
+    event.preventDefault();
     var city = cityEl.value.trim();
-    var london = 'London';
-    getWeatherData(london);
-    console.log(london);
   
     if (city) {
       getWeatherData(city);
@@ -330,7 +320,10 @@ $('.searchBtn').on('click', function () {
     }
 })
 
-$('.savedBtn').on('click', function () {
-    console.log('bye');
+$('.savedBtn').on('click', function (event) {
+    event.preventDefault();
+    console.log('switch');
+    const cityId = $(this).attr('id');
+    switchData(cityId);
 })
 
